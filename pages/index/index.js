@@ -1,3 +1,4 @@
+import { request } from '../../request/index.js'
 //Page Object
 Page({
   data: {
@@ -6,16 +7,21 @@ Page({
   },
   // 页面开始加载 就会触发
   onLoad: function(options) {
-    // 1 发送异步请求获取轮播图数据
-    var reqTask = wx.request({
-      url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
-      success: (result) => {
-        // console.log(result.data.message)
-        this.setData({
-          swiperList: result.data.message
-        })
-      }
-    });
+    // // 1 发送异步请求获取轮播图数据
+    // var reqTask = wx.request({
+    //   url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+    //   success: (result) => {
+    //     // console.log(result.data.message)
+    //     this.setData({
+    //       swiperList: result.data.message
+    //     })
+    //   }
+    // });
+    request({ url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata' }).then(result => {
+      this.setData({
+        swiperList: result.data.message
+      })
+    })
       
   },
   onReady: function() {
